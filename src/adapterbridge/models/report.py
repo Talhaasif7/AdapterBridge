@@ -82,7 +82,8 @@ class ValidationReport(BaseModel):
                     "tool": {
                         "driver": {
                             "name": "AdapterBridge",
-                            "version": "0.1.0",
+                            "version": "0.1.1",
+
                             "informationUri": "https://github.com/adapterbridge/adapterbridge",
                             "rules": list(rules_map.values()),
                         }

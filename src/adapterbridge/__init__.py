@@ -1,6 +1,7 @@
 """AdapterBridge: LoRA Checkpoint & Config Compatibility Engine for Enterprise Inference Runtimes."""
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
+
 
 from adapterbridge.models.manifest import CheckpointManifest, TensorMetadata
 from adapterbridge.models.report import (

@@ -17,7 +17,8 @@ FROM python:3.11-slim AS runner
 
 LABEL org.opencontainers.image.title="AdapterBridge" \
       org.opencontainers.image.description="LoRA Checkpoint & Config Compatibility Engine for Enterprise Inference Runtimes" \
-      org.opencontainers.image.version="0.1.0" \
+      org.opencontainers.image.version="0.1.1" \
+
       org.opencontainers.image.licenses="Apache-2.0"
 
 # Non-root user for Kubernetes security compliance
