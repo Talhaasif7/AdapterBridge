@@ -1,0 +1,8 @@
+- id: adapterbridge-check
+  name: AdapterBridge Pre-Flight Check
+  description: Pre-flight LoRA adapter compatibility linter & validator for enterprise inference engines
+  entry: adapterbridge check
+  language: python
+  types_or: [json, yaml]
+  pass_filenames: false
+  args: ["--path", "./", "--target", "vllm"]

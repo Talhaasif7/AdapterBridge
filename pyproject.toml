@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adapterbridge"
+version = "0.1.0"
+description = "LoRA Checkpoint & Config Compatibility Engine for Enterprise Inference Runtimes"
+readme = "README.md"
+authors = [{ name = "AdapterBridge Team" }]
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "pydantic>=2.7.0",
+    "typer>=0.12.0",
+    "rich>=13.7.0",
+    "safetensors>=0.4.0",
+    "jinja2>=3.1.0",
+    "huggingface-hub>=0.20.0",
+]
+
+[project.optional-dependencies]
+verify = [
+    "torch>=2.0.0",
+]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[project.scripts]
+adapterbridge = "adapterbridge.cli:app"
+
+[project.entry-points."adapterbridge.targets"]
+vllm = "adapterbridge.targets.vllm:VLLMTargetProfile"
+sglang = "adapterbridge.targets.sglang:SGLangTargetProfile"
+ollama = "adapterbridge.targets.ollama:OllamaTargetProfile"
+tensorrt = "adapterbridge.targets.tensorrt:TensorRTTargetProfile"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+

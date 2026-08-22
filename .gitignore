@@ -1,0 +1,35 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest & Coverage cache
+.pytest_cache/
+.coverage
+htmlcov/
+.cache/
+
+# AdapterBridge temporary staging folders
+.adapterbridge_staging_*
+.tmp_zc*
+*.tmp
+
+# Distribution / packaging
+build/
+config/
+dist/
+*.egg-info/
+.eggs/
+
+# Environment variables & virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE / Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
