@@ -30,6 +30,19 @@ class AdapterInspector:
         """Perform static schema inspection and validation against the target profile."""
         return self.target_profile.validate_manifest(self.manifest)
 
+    def run_canary_probe(self, unsupported_modules: Optional[list] = None):
+        """Execute zero-GPU micro activation probing."""
+        from adapterbridge.core.canary import execute_canary_probe
+        return execute_canary_probe(self.manifest, unsupported_modules=unsupported_modules)
+
+    def run_chat_test(self, messages: Optional[list] = None):
+        """Execute chat template round-trip rendering and tokenization test."""
+        from adapterbridge.core.chat_tester import execute_chat_roundtrip_test
+        if not self.manifest.chat_template_str:
+            from adapterbridge.core.chat_tester import ChatRoundTripResult
+            return ChatRoundTripResult(success=False, issues=["Checkpoint has no chat_template defined in tokenizer_config.json."])
+        return execute_chat_roundtrip_test(self.manifest.chat_template_str, messages=messages)
+
     def auto_repair(
         self, destination_path: str, fallback_base_model: Optional[str] = None
     ) -> RemediationPlan:

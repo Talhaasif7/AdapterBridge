@@ -20,6 +20,7 @@ class ValidationIssue(BaseModel):
     message: str
     path: Optional[str] = None
     field: Optional[str] = None
+    quick_fix: Optional[str] = None
 
 
 class ValidationReport(BaseModel):
@@ -31,6 +32,9 @@ class ValidationReport(BaseModel):
     is_compatible: bool
     issues: List[ValidationIssue] = Field(default_factory=list)
     summary: str = ""
+    canary_tested: bool = False
+    canary_passed: Optional[bool] = None
+    canary_delta: Optional[float] = None
 
     @property
     def errors(self) -> List[ValidationIssue]:
@@ -82,7 +86,7 @@ class ValidationReport(BaseModel):
                     "tool": {
                         "driver": {
                             "name": "AdapterBridge",
-                            "version": "0.1.1",
+                            "version": "0.2.0",
 
                             "informationUri": "https://github.com/adapterbridge/adapterbridge",
                             "rules": list(rules_map.values()),

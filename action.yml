@@ -1,0 +1,29 @@
+name: 'AdapterBridge Checkpoint Validator'
+description: 'Pre-flight LoRA checkpoint compatibility gatekeeper for vLLM, SGLang, and enterprise runtimes'
+inputs:
+  checkpoint-path:
+    description: 'Path to LoRA checkpoint directory'
+    required: true
+    default: './checkpoints'
+  target-engine:
+    description: 'Target inference engine (e.g. vllm, sglang, ollama)'
+    required: true
+    default: 'vllm'
+  fail-on-warning:
+    description: 'Whether warnings cause step failure'
+    required: false
+    default: 'false'
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - name: Install AdapterBridge
+      shell: bash
+      run: pip install adapterbridge
+    - name: Run AdapterBridge Diagnostic Check
+      shell: bash
+      run: |
+        adapterbridge check --path ${{ inputs.checkpoint-path }} --target ${{ inputs.target-engine }} --format pr-comment

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "adapterbridge"
-version = "0.1.1"
+version = "0.2.0"
 
 description = "LoRA Checkpoint & Config Compatibility Engine for Enterprise Inference Runtimes"
 readme = "README.md"

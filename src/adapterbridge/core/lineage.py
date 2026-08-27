@@ -52,12 +52,14 @@ def scan_checkpoint(checkpoint_path: str) -> CheckpointManifest:
             pass
 
     has_chat_template = False
+    chat_template_str = None
     if os.path.exists(tok_config_path):
         try:
             with open(tok_config_path, "r", encoding="utf-8") as f:
                 tc_data = json.load(f)
                 if "chat_template" in tc_data and tc_data["chat_template"]:
                     has_chat_template = True
+                    chat_template_str = str(tc_data["chat_template"])
         except Exception:
             pass
 
@@ -69,7 +71,7 @@ def scan_checkpoint(checkpoint_path: str) -> CheckpointManifest:
                 headers = extract_tensor_headers(full_path)
                 tensor_manifest.update(headers)
 
-    return CheckpointManifest(
+    manifest = CheckpointManifest(
         checkpoint_path=checkpoint_path,
         is_adapter=is_adapter,
         base_model_id=base_model_id,
@@ -80,6 +82,8 @@ def scan_checkpoint(checkpoint_path: str) -> CheckpointManifest:
         has_config=has_config,
         has_tokenizer=has_tokenizer,
         has_chat_template=has_chat_template,
+        chat_template_str=chat_template_str,
         tensor_manifest=tensor_manifest,
         validation_errors=[],
     )
+    return manifest

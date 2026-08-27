@@ -28,5 +28,11 @@ class CheckpointManifest(BaseModel):
     has_config: bool = False
     has_tokenizer: bool = False
     has_chat_template: bool = False
+    chat_template_str: Optional[str] = None
+    is_moe: bool = False
+    expert_count: Optional[int] = None
+    is_3d_stacked: bool = False
+    canary_passed: Optional[bool] = None
+    activation_delta: Optional[float] = None
     tensor_manifest: Dict[str, TensorMetadata] = Field(default_factory=dict)
     validation_errors: List[str] = Field(default_factory=list)
